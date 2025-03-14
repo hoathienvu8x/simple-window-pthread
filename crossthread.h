@@ -15,27 +15,27 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif	
+#endif
 
 #include <windows.h>
 #include <process.h>
 #include <errno.h>
 
 typedef struct pthread_tag {
-    HANDLE handle;
+  HANDLE handle;
 } pthread_t;
 
 typedef struct pthread_mutex_tag {
-    HANDLE handle;
+  HANDLE handle;
 } pthread_mutex_t;
 
 /* stub */
 typedef struct pthread_attr_tag {
-    int attr;
+  int attr;
 } pthread_attr_t;
 
 typedef struct pthread_mutexattr_tag {
-    int attr;
+  int attr;
 } pthread_mutexattr_t;
 
 typedef DWORD pthread_key_t;
@@ -72,6 +72,10 @@ int pthread_key_create(pthread_key_t *key, void (*destr_function) (void *));
 int pthread_key_delete(pthread_key_t key);
 int pthread_setspecific(pthread_key_t key, const void *pointer);
 void * pthread_getspecific(pthread_key_t key);
+
+int pthread_cond_init(pthread_cond_t *cond, const void *unused_attr);
+int pthread_cond_signal(pthread_cond_t *cond);
+int pthread_cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex);
 
 #define sleep(num) Sleep(1000*(num))
 
